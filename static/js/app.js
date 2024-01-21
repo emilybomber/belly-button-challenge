@@ -10,20 +10,34 @@ const URL = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 
 function optionChanged(subjectID) {
     console.log(`optionChanged, ${subjectID}`);
-
-    //Plot Bar
-
-    // Plot Bubble Graph 
-
-    // Fill Data in Demographics box
+    //Retrive the correct infomation from the "samples" list 
+    d3.json(URL).then(function (data){
+        // console.log(data);
+        console.log(subjectID);
+        let samples = data["samples"];
+        let matchSample = samples.filter( s => s["id"] == subjectID)[0];
+        console.log(matchSample);
+        buildBarChart(matchSample);
+    });
 }
 
+function buildBarChart(subjectSample) {
+    d3.json(URL).then(function (data){
+        let samples = data.samples
+    console.log(subjectSample)
+    });
+}
+function init() {
+    let selector = d3.select("#selDataset");
+    //Populate the Dropdown options 
+    d3.json(d3.json(URL).then(function (data){
+        let sampleName = data.names;
 
+    }));
+}
 function startup() {
     console.log('startup');
-    //Populate the Dropdown options
-
     //Call Options Changes with first subject
-    optionChanged("AAA");
+    optionChanged("940");
 }
-startup();
+startup(); 
